@@ -246,12 +246,12 @@ public class OurFlatUebersetzung {
         boolean bereitsEntfernt = false;
         String aktuellerString = "";
         String stringZumPruefen = "";
-        for(int i2 = 0; i2 <= stack.size(); i2++){
+        while(!stack.empty()){
             bereitsEntfernt = false;
             aktuellerString = stack.peek();
-            for(int i3 = 0; i3 < aktuellerString.length(); i3++){
-                if(Character.toString(aktuellerString.charAt(i3)).equals(Character.toString(monat.charAt(0)))){
-                    int itemp = i3;
+            for(int charIndex = 0; charIndex < aktuellerString.length(); charIndex++){
+                if(Character.toString(aktuellerString.charAt(charIndex)).equals(Character.toString(monat.charAt(0)))){
+                    int itemp = charIndex;
                     stringZumPruefen = "";
                     while(!Character.toString(aktuellerString.charAt(itemp)).equals(" ")){
                         stringZumPruefen = stringZumPruefen + Character.toString(aktuellerString.charAt(itemp));
@@ -262,7 +262,7 @@ public class OurFlatUebersetzung {
                             bereitsEntfernt = true;
                             break;
                         }
-                        if(Character.toString(aktuellerString.charAt(i3)).equals(" ")){
+                        if(Character.toString(aktuellerString.charAt(charIndex)).equals(" ")){
                             break;
                         }
                     }
@@ -270,13 +270,7 @@ public class OurFlatUebersetzung {
                         break;
                     }
                 }
-            }
-            if(stack.empty()){
-                break;
-            }
-            else{
-                i2 = 0;
-            }
+            }           
             if(bereitsEntfernt == false){
                 stack.pop();
             }
