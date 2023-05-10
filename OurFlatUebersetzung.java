@@ -22,9 +22,11 @@ public class OurFlatUebersetzung {
     //Scanner wird nur verwendet, wenn die Oberflaeche nicht verwendet wird -> liest die Eingabe des Dateipfads sowie monat/jahr etc aus der Konsole aus
     Scanner scanner = new Scanner(System.in);
 
-
-    //Methoden fuer die Oberflaeche                                                                                                          *****Methoden fuer die Oberflaeche
-    //Methode um einen String aus dem Set zu entfernen
+    /**
+     * Entfernt einen String aus dem Set
+     * @param stringToDel Der zu entfernende String
+     * @return Meldung für Erfolg
+     */
     public String entferneStringAusSet(String stringToDel){
         if(filter.contains(stringToDel)){
             filter.remove(stringToDel);
@@ -35,7 +37,11 @@ public class OurFlatUebersetzung {
         }
     }
 
-    //Methode um Strings aus der Oberflaeche zum filter hinzuzufuegen
+    /**
+     * Fügt einen String zum Filter hinzu
+     * @param stringToAdd
+     * @return
+     */
     public String fuegeStringHinzu(String stringToAdd){
         filter.add(stringToAdd);
         filter.add("Nebenkosten");
@@ -49,7 +55,10 @@ public class OurFlatUebersetzung {
         return stringToAdd + " wurde erfolgreich hinzugefuegt";
     }
 
-    //Methode um den Text des Textareals zu aktualisieren
+    /**
+     * Aktualisiert den Anzeige Filter
+     * @return
+     */
     public String anzeigeFilterAktualisieren(){
         //Initialisiert die Erstellung des Filters filter damit die Kosten direkt zu Beginn in der Oberflaeche angezeigt werden
         zuFilterndeKosten();
@@ -60,28 +69,49 @@ public class OurFlatUebersetzung {
         return ausgabeTextAreal;
     }
 
-    //methode um den pfad einzugeben
+    /**
+     * Liest den Dateipfad ein
+     *
+     * @param pfad Der Dateinpfad
+     */
     public void dateipfadLesen(String pfad){
         dateiPfad = pfad;
         gebeAusgabenzuerueck();
     }
 
-    //Methode um den Endbetrag zur Ausgabe zu kriegen
+    /**
+     * Liefert den Endbetrag
+     *
+     * @return Der Enbetrag
+     */
     public String getEndbetrag(){
         return Float.toString(betrag);
     }
 
-    //Methoden zum aufrufen um Monat und Jahr zu setzen
+    /**
+     * Setz den Monat
+     *
+     * @param monat Der Monat
+     */
     public void setzeMonat(String monat){
         this.monat = monat;
     }
+
+    /**
+     * Setzt das Jahr
+     *
+     * @param jahr Das Jahr
+     */
     public void setzeJahr(String jahr){
         this.jahr = jahr;
     }
 
-    //                                                                                                                                          ****** Ende Methoden Oberflaeche */
 
-    //Methode die von ausserhalb aufgerufen wird und die noetigen Methoden aufruft um die einzelnen Schritte abzuarbeiten
+    /**
+     * Berechnet und liefert die Ausgaben
+     *
+     * @return Die Ausgaben
+     */
     public float gebeAusgabenzuerueck(){
         betrag = 0;
         String s =  "";
@@ -92,7 +122,6 @@ public class OurFlatUebersetzung {
             s = dateiPfad;
         }
         s = dateiAuslesen(s);
-        //zuFilterndeKosten(); -> wird hier nicht mehr benötigt, da die Methode bei Initialisierung der Oberflaeche ausgeführt wird
         s = entferneSonderzeichen(s);
         dateiZuListe(s);
         stackAufMonatUeberpreufen();
@@ -101,15 +130,24 @@ public class OurFlatUebersetzung {
         return betrag;
     }
 
-    //ueber ein eingabe feld laesst sich der pfad angeben, dieser wird angesteuert und die vorhandene Datei dann eingelesen und als string gespeichert
-    //gibt die eingelesene Datei als string zueruck, wird nur(!) verwendet, wenn die Oberflaeche nicht verwendet wird -> Testzwecke
+    /**
+     *  ueber ein eingabe feld laesst sich der pfad angeben, dieser wird angesteuert und die vorhandene Datei dann eingelesen und als string gespeichert
+     * gibt die eingelesene Datei als string zueruck, wird nur(!) verwendet, wenn die Oberflaeche nicht verwendet wird -> Testzwecke
+     * @return Pfad zur datei
+     */
     public String leseOurFlatDatei(){
 		String eingabe = scanner.nextLine();
 		String pfadOurFlatDatei = eingabe;
         return pfadOurFlatDatei;
     }
 
-    //Methode zum Auslesen der Textdatei von OurFlat -> Anpassung des Einlesens fuer groeßere Dateien, String wird irgendwann seeehr lang                               *****To Do
+    /**
+     * Liest die Datei aus
+     *
+     * @param pfadOurFlatDatei
+     *
+     * @return Die Datei
+     */
     public String dateiAuslesen(String pfadOurFlatDatei){
         String gesamtString = "";
         try{
@@ -128,7 +166,9 @@ public class OurFlatUebersetzung {
         return gesamtString;
     }
 
-    //fuellt das Set mit Standardkosten die jeden Monat anfallen aber rausgefiltert werden sollen, sowie das Set zum entfernen der Tage aus dem String
+    /**
+     * fuellt das Set mit Standardkosten die jeden Monat anfallen aber rausgefiltert werden sollen, sowie das Set zum entfernen der Tage aus dem String
+     */
     public void zuFilterndeKosten(){
         filter.add("Nebenkosten");
         filter.add("Vorzahlung Essen");
@@ -147,39 +187,15 @@ public class OurFlatUebersetzung {
         tage.add("Fr.");
         tage.add("Sa.");
         tage.add("So.");
-
-
-        //Frueher einmal abfrage nach weiteren woertern die gefiltert werden sollen, vor der GUI
-        /*boolean weiter = true;
-        int counter = 0;
-        System.out.println("Sollen weitere Woerter gefiltert werden?");
-        String weiterStringFrage = scanner.nextLine();
-        if(weiterStringFrage.equals("Nein")){
-            weiter = false;
-        }
-        while(weiter == true){
-            if(counter == 0){
-                System.out.println("Welche Woerter sollen gefiltert werden?");
-                String zuFiltern = scanner.nextLine();
-                filter.add(zuFiltern);
-                counter = 1;
-            }
-            if(counter == 1){
-                System.out.println("Weitere Woerter filtern?");
-                String weitereFilter = scanner.nextLine();
-                if(weitereFilter.equals("Nein")){
-                    weiter = false;
-                    break;
-                }
-                else{
-                    counter = 0;
-                }
-            }
-        }*/
     }
 
-    //entfernt gewoehnliche Sonderzeichen sowie redundante Formulierungen
-    //ersetzt außerdem die Kommas in Bruchbetraegen durch Punkte damit diese spaeter als Float verarbeitet werden koennen
+
+    /**
+     * entfernt gewoehnliche Sonderzeichen sowie redundante Formulierungen
+     * ersetzt außerdem die Kommas in Bruchbetraegen durch Punkte damit diese spaeter als Float verarbeitet werden koennen
+     * @param s der String
+     * @return Der String mit entfernten Zeichen
+     */
     public String entferneSonderzeichen(String s){
         //einmaliges entfernen der == am beginn der Datei, die ein zeichen weniger enthalten
         s = s.replaceFirst("==========", "===========");
@@ -203,7 +219,12 @@ public class OurFlatUebersetzung {
         return s;
     }
 
-    //Fuegt die einzelnen Betraege einem Stack hinzu, in dem diese durch die Slashs getrennt und hinzugefuegt werden
+    /**
+     * Fuegt die einzelnen Betraege einem Stack hinzu, in dem diese durch die Slashs getrennt und hinzugefuegt werden
+     *
+     * @param s Die datei
+     * @return Der Stack
+     */
     public Stack<String> dateiZuListe(String s){
         int counterSlash = 0;
         int startIndex = 0;
@@ -228,7 +249,9 @@ public class OurFlatUebersetzung {
         return stack;
     }
 
-    //Prueft die einzeln Eintraege des Stacks auf den gewuenschten Monat und fuegt diese dem Stack stackZumMonatFilter dann hinzu
+    /**
+     * Prueft die einzeln Eintraege des Stacks auf den gewuenschten Monat und fuegt diese dem Stack stackZumMonatFilter dann hinzu
+     */
     public void stackAufMonatUeberpreufen(){
         boolean bereitsEntfernt = false;
         String aktuellerString = "";
@@ -270,8 +293,11 @@ public class OurFlatUebersetzung {
         }
     }
 
-    //Die Inhalte des Stacks stackzumMonatFilter werden auf die ungewuenschten Betraege aus dem Set "filter" geprueft, Wiederverwendung des Stacks "stack" um die geprueften zu speichern
-    //Die einzelnen Woerter zum Filtern werden ggf. durch Leerzeichen getrennt, deshalb wird auf das vorkommen der Wochentage nach einem Leerzeichen geprueft
+
+    /**
+     * Die Inhalte des Stacks stackzumMonatFilter werden auf die ungewuenschten Betraege aus dem Set "filter" geprueft, Wiederverwendung des Stacks "stack" um die geprueften zu speichern
+     * Die einzelnen Woerter zum Filtern werden ggf. durch Leerzeichen getrennt, deshalb wird auf das vorkommen der Wochentage nach einem Leerzeichen geprueft
+     */
     public void stackAufBetraegePruefen(){
         String aktuellerString = "";
         String leerzeichenPruefen = "";
@@ -321,9 +347,13 @@ public class OurFlatUebersetzung {
         }
     }
 
-    //ungern gewaehlte zweiteilige Funktion, soll die einzelnen Element des Stacks auslesen und dann durch das Jahr den Betrag abziehen                         *****Teilen in zwei Funktionen
-    //Das auslesen des Betrags sollte durch das erreichen des Jahres erreicht werden, da dieses vor dem Betrag steht                                            *****ToDo
-    //Deshalb wird gleichzeitig nach dem jeweilig gewuenschten Jahr gefiltert - Aenderung in zwei Funktionen!
+
+    /**
+     * ungern gewaehlte zweiteilige Funktion, soll die einzelnen Element des Stacks auslesen und dann durch das Jahr den Betrag abziehen                         *****Teilen in zwei Funktionen
+     * Das auslesen des Betrags sollte durch das erreichen des Jahres erreicht werden, da dieses vor dem Betrag steht                                            *****ToDo
+     * Deshalb wird gleichzeitig nach dem jeweilig gewuenschten Jahr gefiltert - Aenderung in zwei Funktionen!
+     * @return
+     */
     public float auslesenDerBetraege(){
         String aktuellerString = "";
         String stringZumPruefen = "";
