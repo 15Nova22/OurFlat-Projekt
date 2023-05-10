@@ -43,7 +43,7 @@ public class MainFrame extends JFrame {
 
 
     //Erstellen eines anzeigeFilters für die Anzeige der Inhalte des Filters                                                                    ****** anzeigeFilter
-    anzeigeFilter.setText(passeTextAn(objekt));
+    anzeigeFilter.setText(objekt.getFilterText());
     //setOpaque true verhindert die Durchsichtigkeit des Elements
     anzeigeFilter.setOpaque(true);
     anzeigeFilter.setFont(mainFont);
@@ -76,7 +76,7 @@ public class MainFrame extends JFrame {
             textFeldLabelBetrag.setText("0.0");
             objekt.dateipfadLesen(temp.getText());
             textFeldLabelBetrag.setText(Float.toString(objekt.betrag));
-            anzeigeFilter.setText(objekt.anzeigeFilterAktualisieren());
+            anzeigeFilter.setText(objekt.getFilterText());
         }
     });
 
@@ -143,7 +143,7 @@ public class MainFrame extends JFrame {
             String firstTextFieldText = textFieldlabelWoerterHinzufuegen.getText();
             objekt.fuegeStringHinzu(firstTextFieldText);
             textFieldlabelWoerterHinzufuegen.setText("");
-            String tempString = passeTextAn(objekt);
+            String tempString = objekt.getFilterText();
             anzeigeFilter.setText(tempString);
             
         }
@@ -159,7 +159,7 @@ public class MainFrame extends JFrame {
             String secondTextFieldText = textFieldlabelWoerterEntfernen.getText();
             objekt.entferneStringAusSet(secondTextFieldText);
             textFieldlabelWoerterEntfernen.setText("");
-            anzeigeFilter.setText(passeTextAn(objekt));
+            anzeigeFilter.setText(objekt.getFilterText());
         }
     });
 
@@ -208,11 +208,5 @@ public class MainFrame extends JFrame {
     setVisible(true);
   }
 
-
-  //Methode um den Text des anzeigeFilter anzupassen
-public String passeTextAn(OurFlatUebersetzung objekt){
-    String temp = objekt.anzeigeFilterAktualisieren();
-    return temp;
-    }
 }
 

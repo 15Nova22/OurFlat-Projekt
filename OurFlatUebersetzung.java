@@ -46,10 +46,10 @@ public class OurFlatUebersetzung {
     }
 
     /**
-     * Aktualisiert den Anzeige Filter
+     * Liefert den Text für den Filter
      * @return
      */
-    public String anzeigeFilterAktualisieren(){
+    public String getFilterText(){
         //Initialisiert die Erstellung des Filters filter damit die Kosten direkt zu Beginn in der Oberflaeche angezeigt werden
         zuFilterndeKosten();
         ausgabeTextAreal = "";
