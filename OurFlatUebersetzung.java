@@ -22,6 +22,11 @@ public class OurFlatUebersetzung {
     //Scanner wird nur verwendet, wenn die Oberflaeche nicht verwendet wird -> liest die Eingabe des Dateipfads sowie monat/jahr etc aus der Konsole aus
     Scanner scanner = new Scanner(System.in);
 
+    public OurFlatUebersetzung() {
+    	createBaseFilters();
+        createWeekdayList();
+    }
+    
     /**
      * Entfernt einen String aus dem Set
      * @param stringToDel Der zu entfernende String
@@ -49,9 +54,7 @@ public class OurFlatUebersetzung {
      * Liefert den Text für den Filter
      * @return
      */
-    public String getFilterText(){
-        //Initialisiert die Erstellung des Filters filter damit die Kosten direkt zu Beginn in der Oberflaeche angezeigt werden
-        zuFilterndeKosten();
+    public String getFilterText(){        
         ausgabeTextAreal = "";
         for(String string: filter) {
 			ausgabeTextAreal = ausgabeTextAreal + "\n" + string;
@@ -155,28 +158,23 @@ public class OurFlatUebersetzung {
         }
         return gesamtString;
     }
-
+    
     /**
-     * fuellt das Set mit Standardkosten die jeden Monat anfallen aber rausgefiltert werden sollen, sowie das Set zum entfernen der Tage aus dem String
+     * Initializes the filters with a basic list
      */
-    public void zuFilterndeKosten(){
-        filter.add("Nebenkosten");
-        filter.add("Vorzahlung Essen");
-        filter.add("Vorzahlung");
-        filter.add("Internet");
-        filter.add("Ausgleich");
-        filter.add("Abtrag");
-        filter.add("Rundfunk");
-        filter.add("Miete");
-
-        //Hinzuefuegen der Tage zum Set tage um diese aus dem String s zu filtern
-        tage.add("Mo.");
-        tage.add("Di.");
-        tage.add("Mi.");
-        tage.add("Do.");
-        tage.add("Fr.");
-        tage.add("Sa.");
-        tage.add("So.");
+    private void createBaseFilters() {
+    	for (String baseFilter: StandardFilters.BASE_FILTERS) {
+    		filter.add(baseFilter);
+    	}
+    }
+    
+    /**
+     * Initializes the weekdays
+     */
+    private void createWeekdayList() {
+    	for(String day : StandardFilters.WEEKDAYS) {
+    		tage.add(day);
+    	}
     }
 
 
