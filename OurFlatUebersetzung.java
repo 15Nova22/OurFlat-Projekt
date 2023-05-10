@@ -40,19 +40,9 @@ public class OurFlatUebersetzung {
     /**
      * Fügt einen String zum Filter hinzu
      * @param stringToAdd
-     * @return
      */
-    public String fuegeStringHinzu(String stringToAdd){
+    public void fuegeStringHinzu(String stringToAdd){
         filter.add(stringToAdd);
-        filter.add("Nebenkosten");
-        filter.add("Vorzahlung Essen");
-        filter.add("Vorzahlung");
-        filter.add("Internet");
-        filter.add("Ausgleich");
-        filter.add("Abtrag");
-        filter.add("Rundfunk");
-        filter.add("Miete");
-        return stringToAdd + " wurde erfolgreich hinzugefuegt";
     }
 
     /**
