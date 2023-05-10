@@ -307,18 +307,18 @@ public class OurFlatUebersetzung {
         while(!stackZumMonatFiltern.empty()){
             aktuellerString = stackZumMonatFiltern.peek();
             //aktualisieren des Strings
-            for(int i2 = 1; i2 < aktuellerString.length(); i2++){
+            for(int charIndex = 1; charIndex < aktuellerString.length(); charIndex++){
                 int itemp = 0;
                 leerzeichenGefunden = false;
                 leerzeichenPruefen = "";
-                stringZumPruefen = stringZumPruefen + Character.toString(aktuellerString.charAt(i2));
+                stringZumPruefen = stringZumPruefen + Character.toString(aktuellerString.charAt(charIndex));
                 //zu pruefender String wurde definiert, sobald der naechste char ein " " ist beginnt die Ueberpruefueng auf die Wochentage
-                if(Character.toString(aktuellerString.charAt(i2)).equals(" ")){
-                    for(int i3 = i2 + 1; itemp < 4; i3++){
+                if(Character.toString(aktuellerString.charAt(charIndex)).equals(" ")){
+                    for(int i3 = charIndex + 1; itemp < 4; i3++){
                         leerzeichenPruefen = leerzeichenPruefen + Character.toString(aktuellerString.charAt(i3));
                         if(tage.contains(leerzeichenPruefen)){
                             leerzeichenGefunden = true;
-                            stringZumPruefen = stringZumPruefen.substring(0, (i2 - 1));
+                            stringZumPruefen = stringZumPruefen.substring(0, (charIndex - 1));
                             break;
                         }
                         if(i3 == aktuellerString.length() - 1){
