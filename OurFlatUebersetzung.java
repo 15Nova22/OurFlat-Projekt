@@ -105,7 +105,7 @@ public class OurFlatUebersetzung {
     public float gebeAusgabenzuerueck(){
         betrag = 0;
         String s =  "";
-        if(dateiPfad.equals("")){
+        if(dateiPfad.strip().isEmpty()){
             s = leseOurFlatDatei();
         }
         else{
