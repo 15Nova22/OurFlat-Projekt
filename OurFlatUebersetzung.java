@@ -11,8 +11,6 @@ public class OurFlatUebersetzung {
     Stack<String> stackZumMonatFiltern = new Stack<String>();
     Set<String> tage = new TreeSet<String>();
 
-    MainFrame mainframe1 = new MainFrame();
-
     private String monat = "";
     private String jahr = "";
     public float betrag = 0;
@@ -126,12 +124,12 @@ public class OurFlatUebersetzung {
         }
         catch(IOException ex){
             System.out.println(ex.getStackTrace());
-        }   
+        }
         return gesamtString;
     }
-    
+
     //fuellt das Set mit Standardkosten die jeden Monat anfallen aber rausgefiltert werden sollen, sowie das Set zum entfernen der Tage aus dem String
-    public void zuFilterndeKosten(){ 
+    public void zuFilterndeKosten(){
         filter.add("Nebenkosten");
         filter.add("Vorzahlung Essen");
         filter.add("Vorzahlung");
@@ -140,7 +138,7 @@ public class OurFlatUebersetzung {
         filter.add("Abtrag");
         filter.add("Rundfunk");
         filter.add("Miete");
-        
+
         //Hinzuefuegen der Tage zum Set tage um diese aus dem String s zu filtern
         tage.add("Mo.");
         tage.add("Di.");
@@ -159,7 +157,7 @@ public class OurFlatUebersetzung {
         if(weiterStringFrage.equals("Nein")){
             weiter = false;
         }
-        while(weiter == true){   
+        while(weiter == true){
             if(counter == 0){
                 System.out.println("Welche Woerter sollen gefiltert werden?");
                 String zuFiltern = scanner.nextLine();
@@ -179,7 +177,7 @@ public class OurFlatUebersetzung {
             }
         }*/
     }
-    
+
     //entfernt gewoehnliche Sonderzeichen sowie redundante Formulierungen
     //ersetzt außerdem die Kommas in Bruchbetraegen durch Punkte damit diese spaeter als Float verarbeitet werden koennen
     public String entferneSonderzeichen(String s){
