@@ -250,10 +250,10 @@ public class OurFlatUebersetzung {
             bereitsEntfernt = false;
             aktuellerString = stack.peek();
             for(int charIndex = 0; charIndex < aktuellerString.length(); charIndex++){
-                if(Character.toString(aktuellerString.charAt(charIndex)).equals(Character.toString(monat.charAt(0)))){
+                if(aktuellerString.charAt(charIndex) == monat.charAt(0)){
                     int itemp = charIndex;
                     stringZumPruefen = "";
-                    while(!Character.toString(aktuellerString.charAt(itemp)).equals(" ")){
+                    while(aktuellerString.charAt(itemp) != ' '){
                         stringZumPruefen = stringZumPruefen + Character.toString(aktuellerString.charAt(itemp));
                         itemp++;
                         if(stringZumPruefen.equals(monat)){
@@ -262,7 +262,7 @@ public class OurFlatUebersetzung {
                             bereitsEntfernt = true;
                             break;
                         }
-                        if(Character.toString(aktuellerString.charAt(charIndex)).equals(" ")){
+                        if(aktuellerString.charAt(charIndex) == ' '){
                             break;
                         }
                     }
